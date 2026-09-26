@@ -13,22 +13,21 @@ export function seedState(): AppState {
   const today = todayKey();
 
   const habits = [
-    { name: 'Read 20 min', emoji: '📚', color: 'sky' as const },
-    { name: 'Exercise', emoji: '💪', color: 'rose' as const },
-    { name: 'Drink water', emoji: '💧', color: 'sky' as const },
-    { name: 'Meditate', emoji: '🧘', color: 'violet' as const },
+    { name: 'Read 20 min', color: 'sky' as const },
+    { name: 'Exercise', color: 'rose' as const },
+    { name: 'Drink water', color: 'emerald' as const },
+    { name: 'Meditate', color: 'violet' as const },
   ];
 
   s.habits = habits.map((h, i) => ({
     id: uid(),
     name: h.name,
-    emoji: h.emoji,
     color: h.color,
     createdAt: addDays(today, -60),
     order: i,
   }));
 
-  // Backfill ~60 days of plausible activity so heatmaps/streaks look real.
+  // Backfill ~60 days of plausible activity so heatmaps/trees look real.
   for (let i = 60; i >= 0; i--) {
     const day = addDays(today, -i);
     // deterministic-ish pseudo randomness from the day string
@@ -43,7 +42,6 @@ export function seedState(): AppState {
       day,
       completedHabitIds: completed,
       leetcodeDone: rand(99) > 0.45,
-      jobAppliedToday: rand(7) > 0.85,
     };
 
     if (rand(3) > 0.6) {
@@ -63,7 +61,7 @@ export function seedState(): AppState {
       title: 'Planting the first seed',
       body:
         'Today I started using Bloom. The idea is simple: every small thing I ' +
-        'do to take care of myself makes the garden grow a little. ' +
+        'do to take care of myself makes the tree grow a little. ' +
         "Let's see what a month of tiny wins looks like.",
       createdAt: now,
       updatedAt: now,
@@ -73,39 +71,10 @@ export function seedState(): AppState {
       day: addDays(today, -3),
       title: 'On slow mornings',
       body:
-        'Woke up late but still got a walk in. Some days the garden only ' +
-        'needs one sprout. That counts too.',
+        'Woke up late but still got a walk in. Some days the tree only ' +
+        'grows one new leaf. That counts too.',
       createdAt: now - 3 * 86_400_000,
       updatedAt: now - 3 * 86_400_000,
-    },
-  ];
-
-  s.jobs = [
-    {
-      id: uid(),
-      company: 'Evergreen Labs',
-      role: 'Frontend Engineer',
-      status: 'interviewing',
-      link: 'https://example.com',
-      notes: 'Second round scheduled next week.',
-      createdAt: addDays(today, -10),
-      updatedAt: now,
-    },
-    {
-      id: uid(),
-      company: 'Meadow Systems',
-      role: 'Full-stack Developer',
-      status: 'applied',
-      createdAt: addDays(today, -5),
-      updatedAt: now,
-    },
-    {
-      id: uid(),
-      company: 'Sunrise Analytics',
-      role: 'Software Engineer',
-      status: 'wishlist',
-      createdAt: addDays(today, -1),
-      updatedAt: now,
     },
   ];
 

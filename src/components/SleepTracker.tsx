@@ -36,7 +36,6 @@ export function SleepTracker({ day }: { day: string }) {
     <Card>
       <CardHeader
         title="Sleep"
-        icon="😴"
         subtitle={avg ? `${avg.toFixed(1)}h avg this week` : 'Log your rest'}
         action={
           log && (
@@ -63,18 +62,20 @@ export function SleepTracker({ day }: { day: string }) {
       </div>
 
       {log ? (
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-slate-400">Quality</span>
           {([1, 2, 3, 4, 5] as const).map((q) => (
             <button
               key={q}
               onClick={() => dispatch({ type: 'SET_SLEEP', log: { ...log, quality: q } })}
-              className={`text-lg transition ${
-                (log.quality ?? 0) >= q ? 'grayscale-0' : 'opacity-30 grayscale'
+              className={`h-3.5 w-3.5 rounded-full border transition ${
+                (log.quality ?? 0) >= q
+                  ? 'border-sky-500 bg-sky-500'
+                  : 'border-slate-300 bg-transparent hover:border-sky-400'
               }`}
               title={`Quality ${q}/5`}
-            >
-              ⭐
-            </button>
+              aria-label={`Set quality ${q} of 5`}
+            />
           ))}
           <span className="ml-auto text-xs text-slate-400">
             {isTonight ? 'last night' : ''}

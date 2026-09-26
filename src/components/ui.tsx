@@ -9,7 +9,7 @@ export function Card({
 }) {
   return (
     <section
-      className={`rounded-3xl border border-white/70 bg-white/80 p-5 shadow-sm backdrop-blur ${className}`}
+      className={`rounded-3xl border border-slate-200/60 bg-transparent p-5 ${className}`}
     >
       {children}
     </section>
@@ -18,25 +18,20 @@ export function Card({
 
 export function CardHeader({
   title,
-  icon,
   action,
   subtitle,
 }: {
   title: string;
-  icon?: ReactNode;
   action?: ReactNode;
   subtitle?: ReactNode;
 }) {
   return (
     <div className="mb-4 flex items-start justify-between gap-3">
-      <div className="flex items-center gap-2.5">
-        {icon && <span className="text-xl leading-none">{icon}</span>}
-        <div>
-          <h2 className="text-sm font-semibold tracking-wide text-slate-800 uppercase">
-            {title}
-          </h2>
-          {subtitle && <p className="text-xs text-slate-500">{subtitle}</p>}
-        </div>
+      <div>
+        <h2 className="text-sm font-semibold tracking-wide text-slate-700 uppercase">
+          {title}
+        </h2>
+        {subtitle && <p className="text-xs text-slate-500">{subtitle}</p>}
       </div>
       {action}
     </div>
@@ -66,10 +61,10 @@ export function Button({
     'inline-flex items-center justify-center gap-1.5 rounded-full font-medium transition disabled:opacity-40 disabled:cursor-not-allowed';
   const sizes = { sm: 'px-3 py-1 text-xs', md: 'px-4 py-2 text-sm' };
   const variants = {
-    primary: 'bg-bloom-600 text-white hover:bg-bloom-700 shadow-sm',
-    ghost: 'text-slate-600 hover:bg-slate-100',
-    soft: 'bg-bloom-50 text-bloom-700 hover:bg-bloom-100',
-    danger: 'text-rose-600 hover:bg-rose-50',
+    primary: 'bg-bloom-600 text-white hover:bg-bloom-700',
+    ghost: 'text-slate-600 hover:bg-slate-500/10',
+    soft: 'bg-bloom-500/10 text-bloom-700 hover:bg-bloom-500/20',
+    danger: 'text-rose-600 hover:bg-rose-500/10',
   };
   return (
     <button
@@ -86,7 +81,7 @@ export function Button({
 
 export function StatPill({ label, value }: { label: string; value: ReactNode }) {
   return (
-    <div className="flex flex-col items-center rounded-2xl bg-slate-50 px-3 py-2">
+    <div className="flex flex-col items-center rounded-2xl border border-slate-200/60 bg-transparent px-3 py-2">
       <span className="text-lg font-bold text-slate-800">{value}</span>
       <span className="text-[10px] font-medium tracking-wide text-slate-500 uppercase">
         {label}
@@ -97,7 +92,7 @@ export function StatPill({ label, value }: { label: string; value: ReactNode }) 
 
 export function EmptyHint({ children }: { children: ReactNode }) {
   return (
-    <p className="rounded-2xl border border-dashed border-slate-200 bg-slate-50/50 px-4 py-6 text-center text-sm text-slate-400">
+    <p className="rounded-2xl border border-dashed border-slate-300/60 px-4 py-6 text-center text-sm text-slate-400">
       {children}
     </p>
   );

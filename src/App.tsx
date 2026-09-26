@@ -8,10 +8,10 @@ import { Stats } from './components/Stats';
 
 type View = 'garden' | 'journal' | 'stats';
 
-const NAV: { id: View; label: string; icon: string }[] = [
-  { id: 'garden', label: 'Garden', icon: '🌻' },
-  { id: 'journal', label: 'Journal', icon: '📓' },
-  { id: 'stats', label: 'Grids', icon: '🔥' },
+const NAV: { id: View; label: string }[] = [
+  { id: 'garden', label: 'Garden' },
+  { id: 'journal', label: 'Journal' },
+  { id: 'stats', label: 'Grids' },
 ];
 
 function Header({ view, setView }: { view: View; setView: (v: View) => void }) {
@@ -19,29 +19,25 @@ function Header({ view, setView }: { view: View; setView: (v: View) => void }) {
   const progress = dayProgress(state, todayKey());
 
   return (
-    <header className="sticky top-0 z-30 border-b border-white/60 bg-white/70 backdrop-blur">
+    <header className="sticky top-0 z-30 border-b border-slate-200/50 bg-white/40 backdrop-blur">
       <div className="mx-auto flex max-w-4xl items-center justify-between gap-4 px-4 py-3">
-        <div className="flex items-center gap-2">
-          <span className="text-2xl">🌱</span>
-          <div className="leading-tight">
-            <h1 className="text-lg font-bold text-slate-800">Bloom</h1>
-            <p className="hidden text-[11px] text-slate-400 sm:block">grow your day</p>
-          </div>
+        <div className="leading-tight">
+          <h1 className="text-lg font-bold text-slate-800">Bloom</h1>
+          <p className="hidden text-[11px] text-slate-400 sm:block">grow your day</p>
         </div>
 
-        <nav className="flex items-center gap-1 rounded-full bg-slate-100 p-1">
+        <nav className="flex items-center gap-1 rounded-full border border-slate-200/60 p-1">
           {NAV.map((n) => (
             <button
               key={n.id}
               onClick={() => setView(n.id)}
-              className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition ${
+              className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition ${
                 view === n.id
-                  ? 'bg-white text-slate-800 shadow-sm'
+                  ? 'bg-bloom-500/15 text-bloom-700'
                   : 'text-slate-500 hover:text-slate-700'
               }`}
             >
-              <span>{n.icon}</span>
-              <span className="hidden sm:inline">{n.label}</span>
+              {n.label}
             </button>
           ))}
         </nav>
@@ -50,7 +46,7 @@ function Header({ view, setView }: { view: View; setView: (v: View) => void }) {
           className="hidden items-center gap-2 sm:flex"
           title={`${Math.round(progress * 100)}% of today's habits done`}
         >
-          <div className="h-2 w-20 overflow-hidden rounded-full bg-slate-200">
+          <div className="h-2 w-20 overflow-hidden rounded-full bg-slate-200/70">
             <div
               className="h-full rounded-full bg-bloom-500 transition-all"
               style={{ width: `${progress * 100}%` }}

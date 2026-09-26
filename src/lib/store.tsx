@@ -11,7 +11,6 @@ import type {
   DayRecord,
   Habit,
   JournalEntry,
-  JobApplication,
   SleepLog,
 } from './types';
 import { emptyDay } from './types';
@@ -39,7 +38,7 @@ function saveState(state: AppState) {
 }
 
 type Action =
-  | { type: 'ADD_HABIT'; name: string; emoji: string; color: Habit['color']; createdAt: string }
+  | { type: 'ADD_HABIT'; name: string; color: Habit['color']; createdAt: string }
   | { type: 'UPDATE_HABIT'; id: string; patch: Partial<Habit> }
   | { type: 'DELETE_HABIT'; id: string }
   | { type: 'TOGGLE_HABIT'; day: string; habitId: string }
@@ -48,8 +47,6 @@ type Action =
   | { type: 'REMOVE_SLEEP'; day: string }
   | { type: 'SAVE_JOURNAL'; entry: JournalEntry }
   | { type: 'DELETE_JOURNAL'; id: string }
-  | { type: 'SAVE_JOB'; job: JobApplication }
-  | { type: 'DELETE_JOB'; id: string }
   | { type: 'RESET_ALL' };
 
 function ensureDay(state: AppState, day: string): DayRecord {
@@ -65,7 +62,6 @@ function reducer(state: AppState, action: Action): AppState {
       const habit: Habit = {
         id: uid(),
         name: action.name,
-        emoji: action.emoji,
         color: action.color,
         createdAt: action.createdAt,
         order,
@@ -128,17 +124,6 @@ function reducer(state: AppState, action: Action): AppState {
     }
     case 'DELETE_JOURNAL':
       return { ...state, journal: state.journal.filter((e) => e.id !== action.id) };
-    case 'SAVE_JOB': {
-      const exists = state.jobs.some((j) => j.id === action.job.id);
-      return {
-        ...state,
-        jobs: exists
-          ? state.jobs.map((j) => (j.id === action.job.id ? action.job : j))
-          : [action.job, ...state.jobs],
-      };
-    }
-    case 'DELETE_JOB':
-      return { ...state, jobs: state.jobs.filter((j) => j.id !== action.id) };
     case 'RESET_ALL':
       return seedState();
     default:
@@ -203,6 +188,5 @@ export function dayScore(state: AppState, day: string): number {
   if (d.leetcodeDone) score += 1;
   if (state.sleep[day]) score += 1;
   if (state.journal.some((e) => e.day === day)) score += 1;
-  if (d.jobAppliedToday) score += 1;
   return score;
 }

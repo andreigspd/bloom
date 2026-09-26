@@ -86,10 +86,10 @@ export function Journal() {
   return (
     <div className="grid h-[calc(100vh-8rem)] grid-cols-1 gap-4 md:grid-cols-[300px_1fr]">
       {/* Entry list */}
-      <div className="flex flex-col rounded-3xl border border-white/70 bg-white/80 shadow-sm backdrop-blur">
-        <div className="flex items-center justify-between border-b border-slate-100 p-4">
-          <h2 className="text-sm font-semibold tracking-wide text-slate-800 uppercase">
-            📓 Journal
+      <div className="flex flex-col rounded-3xl border border-slate-200/60 bg-transparent">
+        <div className="flex items-center justify-between border-b border-slate-200/60 p-4">
+          <h2 className="text-sm font-semibold tracking-wide text-slate-700 uppercase">
+            Journal
           </h2>
           <Button size="sm" onClick={newEntry}>
             + New
@@ -107,7 +107,9 @@ export function Journal() {
                   <button
                     onClick={() => setSelectedId(e.id)}
                     className={`w-full rounded-2xl px-3 py-2.5 text-left transition ${
-                      e.id === selectedId ? 'bg-bloom-50 ring-1 ring-bloom-200' : 'hover:bg-slate-50'
+                      e.id === selectedId
+                        ? 'bg-bloom-500/10 ring-1 ring-bloom-300/50'
+                        : 'hover:bg-slate-500/5'
                     }`}
                   >
                     <p className="truncate text-sm font-medium text-slate-800">
@@ -126,16 +128,16 @@ export function Journal() {
       </div>
 
       {/* Editor */}
-      <div className="flex flex-col rounded-3xl border border-white/70 bg-white/90 shadow-sm backdrop-blur">
+      <div className="flex flex-col rounded-3xl border border-slate-200/60 bg-transparent">
         {selected ? (
           <>
-            <div className="flex items-center justify-between border-b border-slate-100 px-6 py-3">
+            <div className="flex items-center justify-between border-b border-slate-200/60 px-6 py-3">
               <span className="text-xs font-medium text-slate-400">
                 {formatLong(selected.day)}
               </span>
               <div className="flex items-center gap-3">
                 <span className={`text-xs ${saved ? 'text-bloom-600' : 'text-amber-500'}`}>
-                  {saved ? '✓ Saved' : 'Saving…'}
+                  {saved ? 'Saved' : 'Saving…'}
                 </span>
                 <span className="text-xs text-slate-400">{wordCount(body)} words</span>
                 <Button variant="danger" size="sm" onClick={() => deleteEntry(selected.id)}>
@@ -160,7 +162,6 @@ export function Journal() {
           </>
         ) : (
           <div className="flex flex-1 flex-col items-center justify-center gap-3 text-slate-400">
-            <span className="text-4xl">✍️</span>
             <p className="text-sm">Select an entry, or start a new one.</p>
             <Button onClick={newEntry}>+ New entry</Button>
           </div>

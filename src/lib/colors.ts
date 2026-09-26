@@ -57,8 +57,3 @@ export const HABIT_COLORS: Record<HabitColor, ColorSpec> = {
 };
 
 export const COLOR_KEYS = Object.keys(HABIT_COLORS) as HabitColor[];
-
-export const EMOJI_CHOICES = [
-  '🌱', '📚', '💪', '💧', '🧘', '🏃', '🍎', '☀️', '🌙', '✍️',
-  '🎨', '🎸', '🧠', '💻', '🥗', '🚰', '🛏️', '📝', '🌿', '⭐',
-];

@@ -18,7 +18,6 @@ export function HabitTracker({ day }: { day: string }) {
     <Card>
       <CardHeader
         title="Habits"
-        icon="🌿"
         subtitle={`${done.length}/${habits.length} done today`}
         action={
           <Button size="sm" variant="soft" onClick={() => setEditing('new')}>
@@ -28,7 +27,7 @@ export function HabitTracker({ day }: { day: string }) {
       />
 
       {habits.length === 0 ? (
-        <EmptyHint>No habits yet. Add one to start growing your garden.</EmptyHint>
+        <EmptyHint>No habits yet. Add one to start growing your tree.</EmptyHint>
       ) : (
         <ul className="space-y-2">
           {habits.map((h) => {
@@ -41,50 +40,55 @@ export function HabitTracker({ day }: { day: string }) {
               <li key={h.id}>
                 <div
                   className={`group flex items-center gap-3 rounded-2xl border px-3 py-2.5 transition ${
-                    isDone ? `${c.chipBg} ${c.chipBorder}` : 'border-slate-100 bg-white'
+                    isDone ? c.chipBorder : 'border-slate-200/60'
                   }`}
+                  style={isDone ? { backgroundColor: c.flower + '14' } : undefined}
                 >
-                  <button
-                    onClick={() => dispatch({ type: 'TOGGLE_HABIT', day, habitId: h.id })}
-                    aria-pressed={isDone}
-                    className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-lg transition ${
-                      isDone ? 'scale-105' : 'grayscale-[35%] hover:grayscale-0'
-                    }`}
-                    style={{ backgroundColor: isDone ? c.flower + '22' : '#f1f5f9' }}
-                    title={isDone ? 'Completed — click to undo' : 'Mark complete'}
-                  >
-                    {h.emoji}
-                  </button>
+                  {/* color dot */}
+                  <span
+                    className="h-3.5 w-3.5 shrink-0 rounded-full ring-2 ring-white/60"
+                    style={{ backgroundColor: c.flower, opacity: isDone ? 1 : 0.5 }}
+                    aria-hidden
+                  />
 
                   <div className="min-w-0 flex-1">
                     <p className={`truncate text-sm font-medium ${isDone ? c.chipText : 'text-slate-700'}`}>
                       {h.name}
                     </p>
                     <p className="text-xs text-slate-400">
-                      {streak.current > 0 ? `🔥 ${streak.current} day streak` : 'No active streak'}
+                      {streak.current > 0 ? `${streak.current} day streak` : 'No active streak'}
                       {streak.longest > 1 && ` · best ${streak.longest}`}
                     </p>
                   </div>
 
                   <button
                     onClick={() => setEditing(h)}
-                    className="rounded-lg px-2 py-1 text-xs text-slate-300 opacity-0 transition group-hover:opacity-100 hover:text-slate-600"
+                    className="rounded-lg px-2 py-1 text-xs text-slate-400 opacity-0 transition group-hover:opacity-100 hover:text-slate-700"
                     title="Edit habit"
                   >
-                    ✏️
+                    Edit
                   </button>
 
                   <button
                     onClick={() => dispatch({ type: 'TOGGLE_HABIT', day, habitId: h.id })}
-                    className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 text-xs transition ${
-                      isDone
-                        ? 'border-transparent text-white'
-                        : 'border-slate-200 text-transparent hover:border-slate-300'
+                    className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition ${
+                      isDone ? 'border-transparent' : 'border-slate-300 hover:border-slate-400'
                     }`}
                     style={{ backgroundColor: isDone ? c.flower : 'transparent' }}
-                    aria-label={isDone ? 'Completed' : 'Not completed'}
+                    aria-label={isDone ? 'Completed — click to undo' : 'Mark complete'}
+                    title={isDone ? 'Completed — click to undo' : 'Mark complete'}
                   >
-                    ✓
+                    {isDone && (
+                      <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none">
+                        <path
+                          d="M3.5 8.5l3 3 6-6.5"
+                          stroke="white"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    )}
                   </button>
                 </div>
               </li>

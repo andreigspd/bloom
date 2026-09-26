@@ -6,9 +6,7 @@ export type ID = string;
 export interface Habit {
   id: ID;
   name: string;
-  /** Emoji shown in the UI and used as the garden plant glyph. */
-  emoji: string;
-  /** Tailwind-ish accent color key used for theming the card + plant. */
+  /** Accent color key used for theming the card + the tree's blossoms. */
   color: HabitColor;
   createdAt: string; // day key
   archived?: boolean;
@@ -43,34 +41,13 @@ export interface SleepLog {
   note?: string;
 }
 
-export type JobStatus =
-  | 'wishlist'
-  | 'applied'
-  | 'interviewing'
-  | 'offer'
-  | 'rejected';
-
-/** A job application / offer being tracked. */
-export interface JobApplication {
-  id: ID;
-  company: string;
-  role: string;
-  status: JobStatus;
-  link?: string;
-  notes?: string;
-  createdAt: string; // day key
-  updatedAt: number; // epoch ms
-}
-
 /** Per-day state that isn't tied to a specific habit. */
 export interface DayRecord {
   day: string; // day key
   /** ids of habits completed this day */
   completedHabitIds: ID[];
-  /** simple daily checkmarks */
+  /** simple daily checkmark */
   leetcodeDone: boolean;
-  /** applied to a job today (a quick daily flag distinct from the pipeline) */
-  jobAppliedToday: boolean;
 }
 
 export interface AppState {
@@ -78,7 +55,6 @@ export interface AppState {
   habits: Habit[];
   journal: JournalEntry[];
   sleep: Record<string, SleepLog>; // keyed by day
-  jobs: JobApplication[];
   days: Record<string, DayRecord>; // keyed by day
 }
 
@@ -88,7 +64,6 @@ export function emptyState(): AppState {
     habits: [],
     journal: [],
     sleep: {},
-    jobs: [],
     days: {},
   };
 }
@@ -98,6 +73,5 @@ export function emptyDay(day: string): DayRecord {
     day,
     completedHabitIds: [],
     leetcodeDone: false,
-    jobAppliedToday: false,
   };
 }

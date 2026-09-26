@@ -10,8 +10,8 @@ export function Stats() {
   const { state } = useStore();
   const habits = activeHabits(state);
 
-  // Max possible daily score = habits + leetcode + sleep + journal + job
-  const maxScore = habits.length + 4;
+  // Max possible daily score = habits + leetcode + sleep + journal
+  const maxScore = habits.length + 3;
 
   const overallStreak = useMemo(
     () => computeStreaks((d) => dayScore(state, d) > 0),
@@ -51,7 +51,6 @@ export function Stats() {
       <Card>
         <CardHeader
           title="Activity"
-          icon="🌍"
           subtitle="Every green square is a day you grew something"
         />
         <Heatmap
@@ -67,7 +66,7 @@ export function Stats() {
       {/* per-habit grids */}
       {habits.length > 0 && (
         <Card>
-          <CardHeader title="Habit grids" icon="🌿" subtitle="One row of history per habit" />
+          <CardHeader title="Habit grids" subtitle="One row of history per habit" />
           <div className="space-y-5">
             {habits.map((h) => {
               const streak = computeStreaks((d) =>
@@ -76,10 +75,13 @@ export function Stats() {
               return (
                 <div key={h.id}>
                   <div className="mb-1 flex items-center gap-2">
-                    <span>{h.emoji}</span>
+                    <span
+                      className="h-3 w-3 rounded-full"
+                      style={{ backgroundColor: HABIT_COLORS[h.color].flower }}
+                    />
                     <span className="text-sm font-medium text-slate-700">{h.name}</span>
                     <span className="text-xs text-slate-400">
-                      {streak.current > 0 && `🔥 ${streak.current}d`}
+                      {streak.current > 0 && `${streak.current}d`}
                       {streak.longest > 1 && ` · best ${streak.longest}d`}
                     </span>
                   </div>
@@ -89,7 +91,7 @@ export function Stats() {
                     value={(d) => (getDay(state, d).completedHabitIds.includes(h.id) ? 1 : 0)}
                     tooltip={(d) =>
                       `${formatLong(d)} — ${
-                        getDay(state, d).completedHabitIds.includes(h.id) ? 'done ✓' : 'not done'
+                        getDay(state, d).completedHabitIds.includes(h.id) ? 'done' : 'not done'
                       }`
                     }
                   />
@@ -104,21 +106,20 @@ export function Stats() {
       <Card>
         <CardHeader
           title="LeetCode grid"
-          icon="🧩"
-          subtitle={`🔥 ${leetStreak.current}d current · best ${leetStreak.longest}d`}
+          subtitle={`${leetStreak.current}d current · best ${leetStreak.longest}d`}
         />
         <Heatmap
           color="#f59e0b"
           value={(d) => (getDay(state, d).leetcodeDone ? 1 : 0)}
           tooltip={(d) =>
-            `${formatLong(d)} — ${getDay(state, d).leetcodeDone ? 'solved ✓' : 'no problem'}`
+            `${formatLong(d)} — ${getDay(state, d).leetcodeDone ? 'solved' : 'no problem'}`
           }
         />
       </Card>
 
       {/* sleep grid — intensity by hours */}
       <Card>
-        <CardHeader title="Sleep grid" icon="😴" subtitle="Darker = more rest (8h+ is full)" />
+        <CardHeader title="Sleep grid" subtitle="Darker = more rest (8h+ is full)" />
         <Heatmap
           color="#0ea5e9"
           value={(d) => {

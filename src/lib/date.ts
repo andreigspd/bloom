@@ -73,3 +73,20 @@ export function rangeKeys(start: string, end: string): string[] {
   }
   return out;
 }
+
+
+/** Full month name + year for a given month, e.g. "September 2026". */
+export function monthTitle(year: number, monthIndex: number): string {
+  return `${MONTHS[monthIndex]} ${year}`;
+}
+
+/** All day keys in the given calendar month (year, monthIndex 0-11). */
+export function monthDayKeys(year: number, monthIndex: number): string[] {
+  const out: string[] = [];
+  const d = new Date(year, monthIndex, 1);
+  while (d.getMonth() === monthIndex) {
+    out.push(dayKey(d));
+    d.setDate(d.getDate() + 1);
+  }
+  return out;
+}
