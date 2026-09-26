@@ -34,14 +34,23 @@
 html,
 body,
 #root {
-  height: 100%;
+  min-height: 100%;
+}
+
+html {
+  /* Solid base color that matches the gradient's end, so no seam ever shows. */
+  background-color: #f1f4ea;
 }
 
 body {
   margin: 0;
+  min-height: 100vh;
   background:
     radial-gradient(1100px 560px at 50% -12%, #f6efce 0%, transparent 58%),
     linear-gradient(180deg, #fbfcf6 0%, #f1f4ea 100%);
+  /* Keep the gradient anchored to the viewport so it stays seamless on scroll. */
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   color: #2c3428;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
