@@ -64,6 +64,11 @@ export function Dashboard() {
             </button>
           </div>
         )}
+
+        {/* Whole-month history of daily trees, in the same box */}
+        <div className="mt-5 border-t border-bloom-100/70 pt-5">
+          <MonthTrees selectedDay={day} onPickDay={(d) => setDay(d)} />
+        </div>
       </Card>
 
       {/* Tracker grid */}
@@ -74,9 +79,6 @@ export function Dashboard() {
           <LeetCodeCheck day={day} />
         </div>
       </div>
-
-      {/* Whole-month view of daily trees — click a day to load it above */}
-      <MonthTrees onPickDay={(d) => setDay(d)} />
 
       {/* Contribution grids on the main screen */}
       <Stats />

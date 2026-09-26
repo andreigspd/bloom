@@ -4,14 +4,12 @@ import { dayProgress } from './lib/store';
 import { todayKey } from './lib/date';
 import { Dashboard } from './components/Dashboard';
 import { Journal } from './components/Journal';
-import { Stats } from './components/Stats';
 
-type View = 'garden' | 'journal' | 'stats';
+type View = 'garden' | 'journal';
 
 const NAV: { id: View; label: string }[] = [
   { id: 'garden', label: 'Garden' },
   { id: 'journal', label: 'Journal' },
-  { id: 'stats', label: 'Grids' },
 ];
 
 function Header({ view, setView }: { view: View; setView: (v: View) => void }) {
@@ -67,7 +65,6 @@ function Shell() {
       <main className="mx-auto max-w-4xl px-4 py-5">
         {view === 'garden' && <Dashboard />}
         {view === 'journal' && <Journal />}
-        {view === 'stats' && <Stats />}
       </main>
       <footer className="mx-auto max-w-4xl px-4 pb-8 pt-2 text-center text-xs text-slate-400">
         Bloom · your data lives only in this browser

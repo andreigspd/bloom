@@ -1,58 +1,51 @@
 import type { HabitColor } from './types';
 
 interface ColorSpec {
-  /** primary flower / accent */
+  /** primary accent (dot / heatmap) */
   flower: string;
   flowerDark: string;
-  /** button / chip tints (tailwind classes) */
-  chipBg: string;
+  /** chip tints (tailwind classes) */
   chipText: string;
   chipBorder: string;
-  ring: string;
-  /** solid accent for filled states */
-  solidBg: string;
 }
 
+/**
+ * Minimalist, low-saturation earthy palette — muted greens and warm straws.
+ * The HabitColor keys are kept stable so existing saved habits keep working;
+ * only their appearance is retuned to the calmer scheme.
+ */
 export const HABIT_COLORS: Record<HabitColor, ColorSpec> = {
   green: {
-    flower: '#22c55e', flowerDark: '#15803d',
-    chipBg: 'bg-green-50', chipText: 'text-green-700', chipBorder: 'border-green-200',
-    ring: 'ring-green-400', solidBg: 'bg-green-500',
+    flower: '#7fa876', flowerDark: '#52724d',
+    chipText: 'text-[#52724d]', chipBorder: 'border-[#b6cc9c]',
   },
   emerald: {
-    flower: '#10b981', flowerDark: '#047857',
-    chipBg: 'bg-emerald-50', chipText: 'text-emerald-700', chipBorder: 'border-emerald-200',
-    ring: 'ring-emerald-400', solidBg: 'bg-emerald-500',
+    flower: '#6fae94', flowerDark: '#436b58',
+    chipText: 'text-[#436b58]', chipBorder: 'border-[#aacdba]',
   },
   lime: {
-    flower: '#84cc16', flowerDark: '#4d7c0f',
-    chipBg: 'bg-lime-50', chipText: 'text-lime-700', chipBorder: 'border-lime-200',
-    ring: 'ring-lime-400', solidBg: 'bg-lime-500',
+    flower: '#a6b56a', flowerDark: '#6c7a3c',
+    chipText: 'text-[#6c7a3c]', chipBorder: 'border-[#cdd69e]',
   },
   sky: {
-    flower: '#0ea5e9', flowerDark: '#0369a1',
-    chipBg: 'bg-sky-50', chipText: 'text-sky-700', chipBorder: 'border-sky-200',
-    ring: 'ring-sky-400', solidBg: 'bg-sky-500',
+    flower: '#7ba0ac', flowerDark: '#4c6a74',
+    chipText: 'text-[#4c6a74]', chipBorder: 'border-[#b3c8cf]',
   },
   violet: {
-    flower: '#8b5cf6', flowerDark: '#6d28d9',
-    chipBg: 'bg-violet-50', chipText: 'text-violet-700', chipBorder: 'border-violet-200',
-    ring: 'ring-violet-400', solidBg: 'bg-violet-500',
+    flower: '#9d94b5', flowerDark: '#655d7d',
+    chipText: 'text-[#655d7d]', chipBorder: 'border-[#c8c2d6]',
   },
   rose: {
-    flower: '#f43f5e', flowerDark: '#be123c',
-    chipBg: 'bg-rose-50', chipText: 'text-rose-700', chipBorder: 'border-rose-200',
-    ring: 'ring-rose-400', solidBg: 'bg-rose-500',
+    flower: '#c19191', flowerDark: '#8a5d5d',
+    chipText: 'text-[#8a5d5d]', chipBorder: 'border-[#dcc2c2]',
   },
   amber: {
-    flower: '#f59e0b', flowerDark: '#b45309',
-    chipBg: 'bg-amber-50', chipText: 'text-amber-700', chipBorder: 'border-amber-200',
-    ring: 'ring-amber-400', solidBg: 'bg-amber-500',
+    flower: '#d8c46f', flowerDark: '#a08a3f',
+    chipText: 'text-[#8a752f]', chipBorder: 'border-[#e9db9a]',
   },
   orange: {
-    flower: '#f97316', flowerDark: '#c2410c',
-    chipBg: 'bg-orange-50', chipText: 'text-orange-700', chipBorder: 'border-orange-200',
-    ring: 'ring-orange-400', solidBg: 'bg-orange-500',
+    flower: '#cfa06f', flowerDark: '#9c6f40',
+    chipText: 'text-[#8a6236]', chipBorder: 'border-[#e3c7a4]',
   },
 };
 

@@ -4,21 +4,27 @@
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-serif: 'Georgia', 'Times New Roman', serif;
 
-  --color-bloom-50: #f0fdf4;
-  --color-bloom-100: #dcfce7;
-  --color-bloom-200: #bbf7d0;
-  --color-bloom-300: #86efac;
-  --color-bloom-400: #4ade80;
-  --color-bloom-500: #22c55e;
-  --color-bloom-600: #16a34a;
-  --color-bloom-700: #15803d;
-  --color-bloom-800: #166534;
-  --color-bloom-900: #14532d;
+  /* Muted sage / moss green — minimalist, low-saturation */
+  --color-bloom-50: #f4f7ef;
+  --color-bloom-100: #e7eedd;
+  --color-bloom-200: #d2e0bf;
+  --color-bloom-300: #b6cc9c;
+  --color-bloom-400: #9cbf8f;
+  --color-bloom-500: #7fa876;
+  --color-bloom-600: #688f61;
+  --color-bloom-700: #52724d;
+  --color-bloom-800: #405a3d;
+  --color-bloom-900: #334831;
 
-  --color-soil-100: #ede0d4;
-  --color-soil-300: #c9a892;
-  --color-soil-500: #8b5e3c;
-  --color-soil-700: #5c3a21;
+  /* Soft muted yellow / straw — the warm accent */
+  --color-sun-100: #f6efce;
+  --color-sun-300: #e9db9a;
+  --color-sun-500: #d8c46f;
+  --color-sun-700: #b09b4b;
+
+  --color-soil-300: #c9b9a3;
+  --color-soil-500: #a1876b;
+  --color-soil-700: #6f5b46;
 }
 
 :root {
@@ -34,9 +40,9 @@ body,
 body {
   margin: 0;
   background:
-    radial-gradient(1200px 600px at 50% -10%, #e0f2fe 0%, transparent 60%),
-    linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
-  color: #0f172a;
+    radial-gradient(1100px 560px at 50% -12%, #f6efce 0%, transparent 58%),
+    linear-gradient(180deg, #fbfcf6 0%, #f1f4ea 100%);
+  color: #2c3428;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
@@ -44,7 +50,7 @@ body {
 /* Thin, unobtrusive scrollbars */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #cbd5e1 transparent;
+  scrollbar-color: #cdd6c2 transparent;
 }
 
 
