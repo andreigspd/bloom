@@ -4,6 +4,7 @@ import type { JournalEntry } from '../lib/types';
 import { uid } from '../lib/id';
 import { todayKey, formatLong, formatShort } from '../lib/date';
 import { Button } from './ui';
+import { QuoteOfTheDay } from './QuoteOfTheDay';
 
 function wordCount(text: string): number {
   const t = text.trim();
@@ -84,7 +85,10 @@ export function Journal() {
   }
 
   return (
-    <div className="grid h-[calc(100vh-8rem)] grid-cols-1 gap-4 md:grid-cols-[300px_1fr]">
+    <div className="space-y-4">
+      <QuoteOfTheDay />
+
+      <div className="grid h-[calc(100vh-14rem)] min-h-[26rem] grid-cols-1 gap-4 md:grid-cols-[300px_1fr]">
       {/* Entry list */}
       <div className="flex flex-col rounded-3xl border border-slate-200/60 bg-transparent">
         <div className="flex items-center justify-between border-b border-slate-200/60 p-4">
@@ -166,6 +170,7 @@ export function Journal() {
             <Button onClick={newEntry}>+ New entry</Button>
           </div>
         )}
+      </div>
       </div>
     </div>
   );
